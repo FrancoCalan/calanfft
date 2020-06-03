@@ -1,0 +1,6 @@
+# file extensions 
+*.log
+
+# vivado projects
+butterfly_dif/butterfly_dif
+
