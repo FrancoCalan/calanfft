@@ -2,5 +2,5 @@
 *.log
 
 # vivado projects
-butterfly_dif/butterfly_dif
+*/*/
 
