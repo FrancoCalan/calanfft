@@ -17,5 +17,6 @@ void get_twiddles1(int n, int i, wtype *wr, wtype *wi);
 void btfly2(dtype x0r,  dtype x0i, dtype x1r,  dtype x1i,
             wtype wr,   dtype wi,
             dtype *y0r, dtype *y0i, dtype *y1r, dtype *y1i);
-
+void twiddles_loop(dtype xr[SIZE], dtype xi[SIZE],
+                   dtype yr[SIZE], dtype yi[SIZE]);
 #endif // _TWIDDLES_LOOP_H_
