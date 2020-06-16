@@ -1,5 +1,6 @@
 # file extensions 
 *.log
+*.swp
 
 # vivado projects
 */*/

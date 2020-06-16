@@ -2,19 +2,19 @@
 
 void btfly1(dtype x0r,  dtype x0i,
             dtype x1r,  dtype x1i,
-            wtype wr,   dtype wi,
+            wtype wr,   wtype wi,
             dtype *y0r, dtype *y0i,
             dtype *y1r, dtype *y1i) {
 
-	*y0r = x0r + x1r;
-    *y0i = x0i + x1i;
+	*y0r = (x0r + x1r);
+    *y0i = (x0i + x1i);
     *y1r = wr*(x0r - x1r) - wi*(x0i - x1i);
     *y1i = wr*(x0i - x1i) + wi*(x0r - x1r);
 }
 
 void btfly2(dtype x0r,  dtype x0i,
             dtype x1r,  dtype x1i,
-            wtype wr,   dtype wi,
+            wtype wr,   wtype wi,
             dtype *y0r, dtype *y0i,
             dtype *y1r, dtype *y1i) {
 
@@ -29,6 +29,7 @@ void btfly2(dtype x0r,  dtype x0i,
 	dtype k2 = wi *(xdr + xdi);
 	dtype k3 = wr *(xdi - xdr);
 
+	// the /2 is for overflow control
     *y0r = xar;
     *y0i = xai;
     *y1r = k1 - k2;
