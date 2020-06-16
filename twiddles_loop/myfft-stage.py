@@ -13,7 +13,7 @@ xi = np.random.uniform(-0.25, 0.25, npoints)
 # useful variables
 nstages = int(np.log2(npoints))
 y = xr + 1j*xi
-s = 0 # stage
+s = 9 # stage
 
 # fft-dif
 #for s in range(nstages):
