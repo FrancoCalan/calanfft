@@ -10,7 +10,7 @@ typedef ap_fixed<18,2> wtype;
 
 // variables that must be changed manually
 #define SIZE  1024    // FFT size
-#define STAGE 5       // FFT stage [0, ..., log2(N)-1]
+#define STAGE 9       // FFT stage [0, ..., log2(N)-1]
 #include "w_1024_r.h" // twiddle factors real
 #include "w_1024_i.h" // twiddle factors imaginary
 

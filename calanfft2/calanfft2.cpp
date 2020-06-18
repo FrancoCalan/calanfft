@@ -21,6 +21,36 @@ void fft_stage(int stage,
     }
 }
 
+void fft_stage_first(dtype xr[SIZE], dtype xi[SIZE],
+                     dtype yr[SIZE], dtype yi[SIZE]) {
+
+    twiddles_loop: for(int i=0; i<SIZE/2; i++) {
+		#pragma HLS PIPELINE rewind
+    	wtype wr; wtype wi;
+    	get_twiddles1(1, i, &wr, &wi);
+
+		int k1 = i;          // index of btfly 1st input
+        int k2 = i + SIZE/2; // index of btfly 2nd input
+        btfly2(xr[k1], xi[k1], xr[k2], xi[k2], wr, wi,
+               &yr[k1], &yi[k1], &yr[k2], &yi[k2]);
+    }
+}
+
+void fft_stage_last(dtype xr[SIZE], dtype xi[SIZE],
+                    dtype yr[SIZE], dtype yi[SIZE]) {
+
+	btfly_loop: for(int j=0; j<SIZE/2; j++) {
+        #pragma HLS PIPELINE rewind
+
+		int k1 = 2*j;    // index of btfly 1st input
+        int k2 = k1 + 1; // index of btfly 2nd input
+        yr[k1] = (xr[k1] + xr[k2]) / 2;
+        yi[k1] = (xi[k1] + xi[k2]) / 2;
+        yr[k2] = (xr[k1] - xr[k2]) / 2;
+        yi[k2] = (xi[k1] - xi[k2]) / 2;
+    }
+}
+
 void calanfft2(dtype xr[SIZE], dtype xi[SIZE],
                dtype yr[SIZE], dtype yi[SIZE]) {
 	#pragma HLS RESOURCE variable=xr core=RAM_1P
@@ -37,7 +67,7 @@ void calanfft2(dtype xr[SIZE], dtype xi[SIZE],
 	#pragma HLS ARRAY_PARTITION variable=arr_i complete dim=1
 
     // do first stage on input array
-    fft_stage(0, xr, xi, arr_r[0], arr_i[0]);
+    fft_stage_first(xr, xi, arr_r[0], arr_i[0]);
 
     // do intermediate stages
     stage_loop: for(int s=1; s<=STAGES-2; s++) {
@@ -47,6 +77,5 @@ void calanfft2(dtype xr[SIZE], dtype xi[SIZE],
     }
 
     // do last stage on output array
-    fft_stage(STAGES-1, arr_r[STAGES-2], arr_i[STAGES-2],
-        yr, yi);
+    fft_stage_last(arr_r[STAGES-2], arr_i[STAGES-2], yr, yi);
 }

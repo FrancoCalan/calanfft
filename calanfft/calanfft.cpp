@@ -3,7 +3,7 @@
 void fft_stage(int stage,
                dtype xr[SIZE], dtype xi[SIZE],
                dtype yr[SIZE], dtype yi[SIZE]) {
-    int n = 1 << stage;    //number of stage subffts
+	int n = 1 << stage;    //number of stage subffts
     int m = SIZE >> stage; // size of stage subffts
 
     twiddles_loop: for(int i=0; i<m/2; i++) {
@@ -11,7 +11,7 @@ void fft_stage(int stage,
     	get_twiddles1(n, i, &wr, &wi);
 
     	btfly_loop: for(int j=0; j<n; j++) {
-        	#pragma HLS PIPELINE
+        	#pragma HLS PIPELINE //rewind
 
 			int k1 = j*m + i;  // index of btfly 1st input
         	int k2 = k1 + m/2; // index of btfly 2nd input
