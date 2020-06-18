@@ -54,8 +54,8 @@ void calanfft(dtype xr[SIZE], dtype xi[SIZE],
 
     // do intermediate stages
     stage_loop: for(int s=1; s<=STAGES-2; s++) {
-		#pragma HLS UNROLL
-        fft_stage(s, arr_r[s-1], arr_i[s-1], 
+	#pragma HLS UNROLL
+    	fft_stage(s, arr_r[s-1], arr_i[s-1],
                      arr_r[s],   arr_i[s]);
     }
 
