@@ -2,11 +2,9 @@
 #include "math.h"
 #include <iostream>
 
-
 unsigned int reverse_bits(unsigned int input) {
 	int i, rev = 0;
 	for (i = 0; i < M; i++) {
-#pragma HLS UNROLL
 		rev = (rev << 1) | (input & 1);
 		input = input >> 1;
 	}
@@ -20,7 +18,6 @@ void bit_reverse(DTYPE X_R[SIZE], DTYPE X_I[SIZE],
   DTYPE temp;
   
   for (int i = 0; i < SIZE; i++) {
-#pragma HLS UNROLL
 	  reversed = reverse_bits(i); // Find the bit reversed index
 		if (i <= reversed) {
 			// Swap the real values
@@ -49,7 +46,7 @@ void fft_stage(int stage, DTYPE X_R[SIZE], DTYPE X_I[SIZE],
       for(int t = 0; t < step; t++) {
           int i = j + t*DFTpts;
           //    for (int i = j; i < SIZE; i += DFTpts) {
-#pragma HLS PIPELINE
+#pragma HLS pipeline
           int k = j*step;
       DTYPE c = W_real[k];
       DTYPE s = W_imag[k];
@@ -66,28 +63,15 @@ void fft_stage(int stage, DTYPE X_R[SIZE], DTYPE X_I[SIZE],
 
 void fft_streaming(DTYPE X_R[SIZE], DTYPE X_I[SIZE], DTYPE OUT_R[SIZE], DTYPE OUT_I[SIZE])
 {
-
-#pragma HLS RESOURCE variable=X_R core=RAM_1P
-#pragma HLS RESOURCE variable=X_I core=RAM_1P
-#pragma HLS RESOURCE variable=OUT_R core=RAM_1P
-#pragma HLS RESOURCE variable=OUT_I core=RAM_1P
-
   #pragma HLS dataflow
-	//#pragma HLS pipeline II=1024
   DTYPE Stage_R[M][SIZE], Stage_I[M][SIZE];
   #pragma HLS array_partition variable=Stage_R dim=1 complete
   #pragma HLS array_partition variable=Stage_I dim=1 complete
 
-  //bit_reverse	(X_R, X_I, Stage_R[0], Stage_I[0]);
-  loop1:
-  for (int i=0; i<SIZE; i++){
-#pragma HLS UNROLL
-	  Stage_R[0][i] = X_R[i];
-	  Stage_I[0][i] = X_I[i];
-  }
-  stage_loop:
+  bit_reverse(X_R, X_I, Stage_R[0], Stage_I[0]);
+ stage_loop:
   for (int stage = 1; stage < M; stage++) { // Do M-1 stages of butterflies
-    #pragma HLS UNROLL
+    #pragma HLS unroll
     fft_stage(stage, Stage_R[stage-1], Stage_I[stage-1], Stage_R[stage], Stage_I[stage]);
   }
   fft_stage(M, Stage_R[M-1], Stage_I[M-1], OUT_R, OUT_I);

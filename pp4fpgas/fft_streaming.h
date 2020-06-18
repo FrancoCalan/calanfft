@@ -1,8 +1,7 @@
 #ifndef FFT_H_
 #define FFT_H_
 
-#include "ap_int.h"
-typedef ap_int<18> DTYPE;
+typedef float DTYPE;
 typedef int INTTYPE;
 #define M 10 			/* Number of Stages = Log2N */
 #define SIZE 1024 		/* SIZE OF FFT */
