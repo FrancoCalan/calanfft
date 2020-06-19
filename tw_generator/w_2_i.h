@@ -1,3 +1,3 @@
-const wtype wi_arr[] = {
+const wtype w_2_i_arr[] = {
 +0.00000000000000000000,
 };
