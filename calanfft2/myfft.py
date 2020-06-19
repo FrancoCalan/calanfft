@@ -6,7 +6,7 @@ e  = 2.7182818285
 pi = 3.1415926536 
 
 # input signal
-npoints = 1024
+npoints = 16384
 xr = np.random.uniform(-0.25, 0.25, npoints)
 xi = np.random.uniform(-0.25, 0.25, npoints)
 #xr = np.array([0.25, 0.25, 0, 0])
