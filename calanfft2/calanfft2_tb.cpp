@@ -10,14 +10,8 @@ int main() {
     // getting gold data
 	std::ifstream gold_x;
 	std::ifstream gold_y;
-	//gold_x.open("gold_1024_x.dat");
-	//gold_y.open("gold_1024_y.dat");
-	//gold_x.open("gold_65536_x.dat");
-	//gold_y.open("gold_65536_y.dat");
-	//gold_x.open("gold_32768_x.dat");
-	//gold_y.open("gold_32768_y.dat");
-	gold_x.open("gold_16384_x.dat");
-	gold_y.open("gold_16384_y.dat");
+	gold_x.open("gold_1024_x.dat");
+	gold_y.open("gold_1024_y.dat");
 	for (int i=0; i<SIZE; ++i) {
         gold_x >> xr_tb[i] >> xi_tb[i];
     	gold_y >> yr_tb[i] >> yi_tb[i];
@@ -34,7 +28,7 @@ int main() {
     for(int i=0; i<SIZE; ++i) {
         float error = fabs(yr[i].to_float()-yr_tb[i]) + fabs(yi[i].to_float()-yi_tb[i]);
         abs_error += error;
-        //printf("Channel %i error: %f\n", i, error);
+        printf("Channel %i error: %f\n", i, error);
         if (error > max_error) {
             max_error = error;
         }
