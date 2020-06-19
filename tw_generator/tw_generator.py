@@ -19,14 +19,14 @@ w_arr = np.exp(-1j*2*np.pi*n/args.N)
 
 # real part of twiddle factors
 with open("w_" + str(args.N) + "_r.h", "w") as f:
-    f.write("const wtype wr_arr[] = {\n");
+    f.write("const wtype w_" + str(args.N) + "_r_arr[] = {\n");
     for w in w_arr:
         f.write("{0:+.20f}".format(np.real(w)) + ",\n")
     f.write("};")
 
 # imaginary part of twiddle factors
 with open("w_" + str(args.N) + "_i.h", "w") as f:
-    f.write("const wtype wi_arr[] = {\n");
+    f.write("const wtype w_"+ str(args.N) + "_i_arr[] = {\n");
     for w in w_arr:
         f.write("{0:+.20f}".format(np.imag(w)) + ",\n")
     f.write("};")
