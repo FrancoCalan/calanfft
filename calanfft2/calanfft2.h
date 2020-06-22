@@ -7,10 +7,10 @@ typedef ap_fixed<18,1> dtype;
 typedef ap_fixed<18,2> wtype;
 
 // variables that must be changed manually
-#define SIZE 1024      // FFT size
-#define STAGES 10      // = log2(SIZE)
-#include "twiddle_factors/w_1024_r.h"
-#include "twiddle_factors/w_1024_i.h"
+#define SIZE 16384     // FFT size
+#define STAGES 14      // = log2(SIZE)
+#include "twiddle_factors/w_16384_r.h"
+#include "twiddle_factors/w_16384_i.h"
 
 // functions declarations
 void get_twiddles1(int n, int i, wtype *wr, wtype *wi);
