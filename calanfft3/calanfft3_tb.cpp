@@ -1,5 +1,5 @@
 #include <fstream>
-#include "calanfft2.h"
+#include "calanfft3.h"
 
 // creating variables
 dtype yr[SIZE], yi[SIZE];
@@ -10,18 +10,8 @@ int main() {
     // getting gold data
 	std::ifstream gold_x;
 	std::ifstream gold_y;
-	std::string goldx_name;
-	std::string goldy_name;
-
-	std::stringstream sstmx;
-	std::stringstream sstmy;
-	sstmx << "gold_" << SIZE <<"_x.dat";
-	sstmy << "gold_" << SIZE <<"_y.dat";
-	goldx_name = sstmx.str();
-	goldy_name = sstmy.str();
-
-	gold_x.open(goldx_name.c_str());
-	gold_y.open(goldy_name.c_str());
+	gold_x.open("gold_16384_x.dat");
+	gold_y.open("gold_16384_y.dat");
 	for (int i=0; i<SIZE; ++i) {
         gold_x >> xr_tb[i] >> xi_tb[i];
     	gold_y >> yr_tb[i] >> yi_tb[i];
@@ -30,7 +20,7 @@ int main() {
     }
 
     // perform fft
-    calanfft2(xr_tb, xi_tb, yr, yi);
+    calanfft3(xr_tb, xi_tb, yr, yi);
 
     // check data integrity
     float abs_error = 0.0;
