@@ -4,7 +4,7 @@ This project is an attempt to implement the FFT algorithm
 using Xilinx HLS (High-Level Synthesis) for the Virtex-6 FPGA.
 The final goal of this project is to give an alternative for
 spectrometer programming for the ROACH1/ROACH2 platform (see
-(casper.berkeley.edu)).
+https://casper.berkeley.edu).
 
 ## Sub-projects
 - **butterfly_dif:**: implementation of DiF (decimation in frequency) butterfly of FFT. This is the most atomic component
