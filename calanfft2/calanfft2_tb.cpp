@@ -30,7 +30,7 @@ int main() {
     }
 
     // perform fft
-    calanfft2(xr_tb, xi_tb, yr, yi);
+    calanfft(xr_tb, xi_tb, yr, yi);
 
     // check data integrity
     float abs_error = 0.0;

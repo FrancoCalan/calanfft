@@ -53,8 +53,28 @@ void fft_stage_last(dtype xr[SIZE], dtype xi[SIZE],
     }
 }
 
-void calanfft2(dtype xr[SIZE], dtype xi[SIZE],
-               dtype yr[SIZE], dtype yi[SIZE]) {
+unsigned int reverse_bits(unsigned int x) {
+
+    unsigned int rev = 0;
+    rev_loop: for (int i=0; i<STAGES; i++) {
+        rev = (rev << 1) | (x & 1);
+        x = x >> 1;
+    }
+    return rev;
+}
+
+void bit_reverse(dtype xr[SIZE], dtype xi[SIZE],
+		         dtype yr[SIZE], dtype yi[SIZE]) {
+    for (unsigned int i=0; i<SIZE; i++) {
+		#pragma HLS PIPELINE II=1 //rewind
+    	unsigned int j = reverse_bits(i);
+    	yr[j] = xr[i];
+        yi[j] = xi[i];
+    }
+}
+
+void calanfft(dtype xr[SIZE], dtype xi[SIZE],
+              dtype yr[SIZE], dtype yi[SIZE]) {
 	#pragma HLS RESOURCE variable=xr core=RAM_1P
 	#pragma HLS RESOURCE variable=xi core=RAM_1P
 	#pragma HLS RESOURCE variable=yr core=RAM_1P
@@ -80,4 +100,7 @@ void calanfft2(dtype xr[SIZE], dtype xi[SIZE],
 
     // do last stage on output array
     fft_stage_last(arr_r[STAGES-2], arr_i[STAGES-2], yr, yi);
+
+    // reorder input in canonical order
+    //bit_reverse(arr_r[STAGES-1], arr_i[STAGES-1], yr, yi);
 }

@@ -19,6 +19,6 @@ void btfly1(dtype x0r,  dtype x0i, dtype x1r,  dtype x1i,
 void btfly2(dtype x0r,  dtype x0i, dtype x1r,  dtype x1i,
             wtype wr,   wtype wi,
             dtype *y0r, dtype *y0i, dtype *y1r, dtype *y1i);
-void calanfft2(dtype xr[SIZE], dtype xi[SIZE],
-               dtype yr[SIZE], dtype yi[SIZE]);
+void calanfft(dtype xr[SIZE], dtype xi[SIZE],
+              dtype yr[SIZE], dtype yi[SIZE]);
 #endif // _CALANFFT2_H_
