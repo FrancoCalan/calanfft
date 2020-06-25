@@ -22,7 +22,7 @@ inefficient implementation, specially in the use of memory.
 twiddle factors, instead of loading them to ROM. Has more
 quantization error. Better to use calanfft2.
 - **pp4fpgas:** copy of another FFT implementation used for help.
-Extracted from here: (github.com/KastnerRG/pp4fpgas)
+Extracted from here: https://github.com/KastnerRG/pp4fpgas
 - **tw_generator:** python script for the generation of twiddle
 factors into a file. Used to later be loaded as ROM in FFT
 implementations.
