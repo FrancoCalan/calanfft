@@ -4,7 +4,7 @@ This project is an attempt to implement the FFT algorithm
 using Xilinx HLS (High-Level Synthesis) for the Virtex-6 FPGA.
 The final goal of this project is to give an alternative for
 spectrometer programming for the ROACH1/ROACH2 platform (see
-casper.berkeley.edu).
+(casper.berkeley.edu)).
 
 ## Sub-projects
 - **butterfly_dif:**: implementation of DiF (decimation in frequency) butterfly of FFT. This is the most atomic component
@@ -22,7 +22,7 @@ inefficient implementation, specially in the use of memory.
 twiddle factors, instead of loading them to ROM. Has more
 quantization error. Better to use calanfft2.
 - **pp4fpgas:** copy of another FFT implementation used for help.
-Extracted from here: github.com/KastnerRG/pp4fpgas
+Extracted from here: (github.com/KastnerRG/pp4fpgas)
 - **tw_generator:** python script for the generation of twiddle
 factors into a file. Used to later be loaded as ROM in FFT
 implementations.
